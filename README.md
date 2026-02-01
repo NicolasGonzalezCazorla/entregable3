@@ -17,9 +17,7 @@ No se ha implementado lógica de negocio ni conexión con bases de datos, ya que
 - Tailwind CSS (framework principal de estilos)
 - Bootstrap (uso puntual)
 - CSS puro (solo en los casos en los que el framework no permitía reproducir el diseño)
-
 ## Componentes visuales desarrollados
-
 - Header
 - Footer
 - Grid
