@@ -3,11 +3,10 @@ import Image from "next/image";
 export default function PerfilInfo() {
   return (
     <section className="mt-5 flex items-start gap-8">
-      {/* Columna izquierda: avatar + username debajo */}
       <div className="flex w-[170px] flex-col items-center">
         <div className="h-24 w-24 rounded-full overflow-hidden border border-black/10 bg-white shadow-sm">
           <Image
-            src="/image.png"
+            src="/fotoPerfil.png"
             alt="Foto de perfil"
             width={160}
             height={160}
@@ -21,7 +20,6 @@ export default function PerfilInfo() {
         </p>
       </div>
 
-      {/* Columna derecha: datos */}
       <div className="flex-1 pt-2">
         <p className="text-xs text-gray-700">
           <span className="font-semibold text-gray-900">Nombre:</span>{" "}
@@ -35,7 +33,6 @@ export default function PerfilInfo() {
           Correo de usuario
         </p>
 
-        {/* Botoncito editar (simple, como iconito suelto) */}
         <button
           type="button"
           className="mt-2 inline-flex items-center justify-center h-7 w-7 rounded-md border border-black/10 bg-white shadow-sm hover:bg-black/5 transition"

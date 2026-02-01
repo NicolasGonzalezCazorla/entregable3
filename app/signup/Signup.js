@@ -61,7 +61,7 @@ export default function Signup() {
     <main className="min-h-screen w-full">
       <div
         className="min-h-screen w-full bg-cover bg-center flex items-center justify-center px-4"
-        style={{ backgroundImage: "url('/Leopardos.png')" }} // <-- cambia si tu imagen se llama distinto
+        style={{ backgroundImage: "url('/Leopardos.png')" }} 
       >
         <div className="w-full max-w-md rounded-2xl bg-white/60 backdrop-blur-md shadow-xl border border-white/40 px-8 py-7">
           <h1 className="text-center text-xl font-extrabold text-gray-900">

@@ -9,7 +9,6 @@ export default function PerfilPage() {
       <Header />
 
       <div className="mx-auto max-w-6xl px-6 pt-24 pb-14">
-        {/* texto pequeñito arriba como en la captura */}
         <p className="text-[11px] text-gray-500">Perfil</p>
 
         <PerfilInfo />
