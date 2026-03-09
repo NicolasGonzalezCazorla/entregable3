@@ -1,38 +1,57 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react"; // 1. Añadimos useEffect
 import Grid from "../grid";
 import NavBar from "../navBar";
 import Filtro from "./filtro";
 
 export default function Animales() {
-  const animalesMock = [
-    { id: 1, nombre: "Pandas gigantes", tipo: "Mamíferos", continente: "Asia", imagen: "/panda.jpg", favorito: false },
-    { id: 2, nombre: "Hipopótamo", tipo: "Mamíferos", continente: "África", imagen: "/hipopotamo.jpg", favorito: false },
-    { id: 3, nombre: "Leon", tipo: "Mamíferos", continente: "África", imagen: "/leon.jpg", favorito: false },
-    { id: 4, nombre: "Pingüino emperador", tipo: "Aves", continente: "Antártida", imagen: "/pinguinos.jpg", favorito: false },
-  ];
-
-  const [animales] = useState(animalesMock);
+  // 2. Estado inicial vacío. Ya no usamos animalesMock aquí.
+  const [animales, setAnimales] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [orden, setOrden] = useState("gustados");
-
   const [filtroTipo, setFiltroTipo] = useState("");
   const [filtroContinente, setFiltroContinente] = useState("");
   const [busqueda, setBusqueda] = useState("");
 
+  // 3. Llamada a la API al cargar la página
+  useEffect(() => {
+    async function cargarAnimales() {
+      try {
+        const response = await fetch('/api/animales'); // Llamada a tu Route Handler
+        const data = await response.json();
+
+        if (response.ok) {
+          setAnimales(data); // Guardamos los datos de Supabase en el estado
+        } else {
+          console.error("Error al obtener datos:", data.error);
+        }
+      } catch (error) {
+        console.error("Error de conexión:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    cargarAnimales();
+  }, []);
+
+  // 4. Los filtros ahora usan las columnas reales de tu base de datos
   const animalesFiltrados = animales
     .filter((animal) => {
-      const tipoOK = filtroTipo === "" || animal.tipo === filtroTipo;
-      const continenteOK = filtroContinente === "" || animal.continente === filtroContinente;
+      // Ajustamos 'tipo' por 'dieta' u 'origen' según tus columnas reales
+      const tipoOK = filtroTipo === "" || animal.dieta === filtroTipo; 
+      const continenteOK = filtroContinente === "" || animal.origen === filtroContinente;
       const nombreOK = animal.nombre.toLowerCase().includes(busqueda.toLowerCase());
       return tipoOK && continenteOK && nombreOK;
     })
-    .slice()
     .sort((a, b) => {
       if (orden === "alfabetico") return a.nombre.localeCompare(b.nombre);
       return a.id - b.id;
     });
+
+  if (loading) return <div className="text-center py-20">Cargando animales desde la base de datos...</div>;
 
   return (
     <main className="bg-[#F6F7F3]">
@@ -40,7 +59,7 @@ export default function Animales() {
         <div className="mb-6">
           <h1 className="text-2xl font-extrabold text-gray-900">Animales</h1>
           <p className="mt-2 text-sm text-gray-700 max-w-3xl leading-relaxed">
-            Descubre la cantidad de especies dentro de nuestro zoo
+            Descubre la cantidad de especies dentro de nuestro zoo (Datos reales de Supabase)
           </p>
         </div>
 
@@ -63,6 +82,7 @@ export default function Animales() {
           </aside>
 
           <section>
+            {/* El Grid recibe ahora los datos que vienen de la API */}
             <Grid animales={animalesFiltrados} />
 
             <div className="mt-12 flex justify-center">

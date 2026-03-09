@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useRef, useState, useEffect } from "react";
 import Header from "../Header";
 
@@ -95,9 +96,9 @@ export default function HomePage() {
         <section className="bg-[#EEF2EA]">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
-              <h2 className="text-sm font-extrabold tracking-wide text-gray-800 uppercase">
-                Mapa
-              </h2>
+              <Link href="/mapa" className="text-sm font-extrabold tracking-wide text-gray-800 uppercase">
+                <h2>Mapa</h2>
+              </Link>
               <p className="mt-3 text-sm text-gray-700 leading-relaxed max-w-prose">
                 Explora cada rincón de nuestro parque: desde la sabana africana
                 hasta la selva tropical. ¡Encuentra fácilmente tus animales
@@ -119,12 +120,14 @@ export default function HomePage() {
 
         <section className="rounded-md bg-[#E8EEDF] border border-black/10 py-10">
           <div className="text-center px-4">
-            <h2 className="text-sm font-extrabold tracking-wide text-gray-800">
+            <Link href="/animales" className="text-m font-extrabold tracking-wide text-gray-800">
               Conoce a nuestros animales
-            </h2>
-            <p className="mt-2 text-[12px] text-gray-700 max-w-2xl mx-auto leading-relaxed">
+            </Link>
+            
+            <p className="mt-2 text-[13px] text-gray-700 max-w-2xl mx-auto leading-relaxed">
               Explora las increíbles especies que viven con nosotros y descubre
               datos fascinantes sobre su vida y conservación.
+            
             </p>
           </div>
 
@@ -203,9 +206,9 @@ export default function HomePage() {
             </div>
 
             <div>
-              <h2 className="text-sm font-extrabold tracking-wide text-gray-800 uppercase">
-                Actividades
-              </h2>
+              <Link href="/Actividades" className="text-sm font-extrabold tracking-wide text-gray-800 uppercase">
+                <h2>Actividades</h2>
+              </Link>
               <p className="mt-3 text-sm text-gray-700 leading-relaxed">
                 Talleres educativos, alimentación de animales, recorridos guiados
                 y más. ¡Vive una aventura salvaje!

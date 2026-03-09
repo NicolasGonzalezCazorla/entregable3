@@ -1,3 +1,6 @@
+import Link from "next/link";
+
+
 export default function Home() {
   return (
     <div className="fixed inset-0 w-screen h-screen overflow-hidden">
@@ -23,12 +26,17 @@ export default function Home() {
         </div>
 
         <div className="flex gap-3">
-          <button className="px-4 py-2 bg-[#6B7F4B] text-white rounded-xl text-sm font-medium">
-            Log in
-          </button>
-          <button className="px-4 py-2 bg-[#6B7F4B] text-white rounded-xl text-sm font-medium">
-            Sign up
-          </button>
+
+          <li>
+            <Link href="/Login" className="px-4 py-2 bg-[#6B7F4B] text-white rounded-xl text-sm font-medium">
+              Log in
+            </Link>
+          </li>
+          <li>
+            <Link href="/signup" className="px-4 py-2 bg-[#6B7F4B] text-white rounded-xl text-sm font-medium">
+              Sing up
+            </Link>
+          </li>
         </div>
       </header>
     </div>

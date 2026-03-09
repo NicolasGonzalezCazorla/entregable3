@@ -1,4 +1,7 @@
+
+
 "use client";
+
 
 import { useState } from "react";
 import Link from "next/link";
@@ -83,21 +86,16 @@ export default function Login() {
             )}
 
             <div className="pt-2 flex items-center justify-between">
-              <Link
-                href="/"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-400/70 bg-white/70 px-5 py-2 text-sm text-gray-800 hover:bg-white transition"
-              >
-                <span className="inline-block w-4 h-4 rounded-full border border-gray-500/60" />
+              <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-400/70 bg-white/70 px-5 py-2 text-sm text-gray-800 hover:bg-white transition">
                 Volver
               </Link>
 
-              <button
-                type="submit"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-400/70 bg-white/70 px-5 py-2 text-sm text-gray-800 hover:bg-white transition"
-              >
-                <span className="inline-block w-4 h-4 rounded-full border border-gray-500/60" />
+             
+
+              <Link href="/zoo" className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-400/70 bg-white/70 px-5 py-2 text-sm text-gray-800 hover:bg-white transition">
                 Entrar
-              </button>
+              </Link>
+            
             </div>
           </form>
         </div>

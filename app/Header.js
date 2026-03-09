@@ -7,7 +7,7 @@ export default function Header() {
     <header className="fixed top-0 left-0 w-full z-50 h-20 bg-white/80 backdrop-blur-md border-b border-black/10">
       <div className="mx-auto max-w-7xl px-6 h-full flex items-center justify-between">
         
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/zoo" className="flex items-center gap-3">
           <img
             src="/perfil.png"
             alt="Inicio"
@@ -35,13 +35,15 @@ export default function Header() {
           </ul>
         </nav>
 
-        <Link href="/log-in" className="flex items-center">
+        <Link href="/Perfil" className="flex items-center">
           <img
             src="/usuario.png"
             alt="Usuario"
             className="h-10 w-10 object-contain"
           />
         </Link>
+
+        
       </div>
     </header>
   );
