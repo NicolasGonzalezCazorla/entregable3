@@ -1,62 +1,73 @@
-"use client";
+// app/detalleAnimal/detalleAnimal.js
+import { supabase } from "@/lib/supabase";
 
-export default function AnimalDetalle() {
-  const animal = {
-    nombre: "Panda gigante",
-    nombreCientifico: "Ailuropoda melanoleuca",
-    origen: "Bosques montañosos de China",
-    dieta: "Herbívoro (principalmente bambú)",
-    esperanzaVida: "20 a 30 años",
-    estado: "Vulnerable",
-    comportamiento: "Solitario, pacífico y muy juguetón",
-    descripcion:
-      "El panda gigante es uno de los animales más emblemáticos del mundo. Origina de las montañas de China, se alimenta principalmente de bambú y es conocido por su carácter tranquilo y su distintivo pelaje blanco y negro. En nuestro zoológico podrás observarlo en un espacio que simula su ecosistema natural.",
-    imagen: "/panda.jpg",
-  };
+export default async function DetalleAnimal({ id }) {
+  if (!id) return <div className="p-10 text-center text-gray-500">No se ha seleccionado ningún animal.</div>;
+
+  // Pedimos los datos del animal específico por ID
+  const { data: animal, error } = await supabase
+    .from("animal")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error || !animal) {
+    return <div className="p-10 text-center text-red-500">Error al cargar el animal o no existe.</div>;
+  }
 
   return (
-    <main className="min-h-screen bg-[#F6F7F3]">
-      <div className="mx-auto max-w-7xl px-8 pt-28 pb-16">
-        
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-          
-          <div className="rounded-xl overflow-hidden border border-black/10 bg-white shadow-sm">
-            <img
-              src={animal.imagen}
-              alt={animal.nombre}
-              className="w-full h-[300px] sm:h-[360px] md:h-[420px] object-cover"
-            />
-          </div>
+    <div className="max-w-7xl mx-auto px-8 py-16 text-[#1a1a1a]">
+      {/* SECCIÓN SUPERIOR: IMAGEN Y DESCRIPCIÓN */}
+      <div className="flex flex-col md:flex-row gap-12 mb-20 items-start">
+        <div className="md:w-1/2">
+          <img
+            src={animal.imagen}
+            alt={animal.nombre}
+            className="w-full h-auto rounded-[2.5rem] shadow-lg object-cover aspect-[4/3]"
+          />
+        </div>
 
-          <div className="pt-4 max-w-xl">
-            <p className="text-base text-gray-700 leading-relaxed">
-              {animal.descripcion}
-            </p>
-          </div>
-        </section>
-        <section className="mt-12">
-          <h1 className="text-3xl font-extrabold text-gray-900">
-            {animal.nombre}
-          </h1>
-
-          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-4 text-sm text-gray-700">
-            <InfoRow label="Nombre científico" value={animal.nombreCientifico} />
-            <InfoRow label="Esperanza de vida" value={animal.esperanzaVida} />
-            <InfoRow label="Origen" value={animal.origen} />
-            <InfoRow label="Estado de conservación" value={animal.estado} />
-            <InfoRow label="Dieta" value={animal.dieta} />
-            <InfoRow label="Comportamiento" value={animal.comportamiento} />
-          </div>
-        </section>
+        <div className="md:w-1/2 pt-4">
+          <p className="text-gray-600 text-xl leading-relaxed italic">
+            "{animal.descripcion}"
+          </p>
+        </div>
       </div>
-    </main>
+
+      {/* SECCIÓN INFERIOR: TÍTULO Y FICHA TÉCNICA */}
+      <section className="border-t border-gray-100 pt-12">
+        <h1 className="text-7xl font-black mb-16 tracking-tighter uppercase text-slate-900">
+          {animal.nombre}
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-12">
+          {/* Columna Izquierda */}
+          <div className="space-y-12">
+            <InfoBox label="Nombre científico" value={animal.nombre_cient} isItalic />
+            <InfoBox label="Origen" value={animal.origen} />
+            <InfoBox label="Dieta" value={animal.dieta} />
+          </div>
+
+          {/* Columna Derecha */}
+          <div className="space-y-12">
+            <InfoBox label="Esperanza de vida" value={animal.esperanza_vida} />
+            <InfoBox label="Estado de conservación" value="Vulnerable" isHighlighted />
+            <InfoBox label="Comportamiento" value={animal.comportamiento} />
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
-function InfoRow({ label, value }) {
+
+// Componente pequeño para los items de la ficha (limpia el código)
+function InfoBox({ label, value, isItalic = false, isHighlighted = false }) {
   return (
-    <p className="leading-relaxed">
-      <span className="font-semibold text-gray-900">{label}:</span>{" "}
-      <span>{value}</span>
-    </p>
+    <div>
+      <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-3">{label}</p>
+      <p className={`text-2xl font-bold ${isItalic ? 'italic' : ''} ${isHighlighted ? 'text-orange-600' : 'text-slate-800'}`}>
+        {value}
+      </p>
+    </div>
   );
 }

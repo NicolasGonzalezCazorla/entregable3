@@ -7,7 +7,7 @@ export async function GET() {
     // Consultamos la tabla 'animal' con las columnas exactas de tu captura
     const { data, error } = await supabase
       .from('animal')
-      .select('id, nombre, nombre_cient, origen, dieta, esperanza_vida, comportamiento, descripcion');
+      .select('id, nombre, nombre_cient, origen, dieta, esperanza_vida, comportamiento, descripcion,imagen');
 
     // Si hay un error en la base de datos, devolvemos un 500 (Error del servidor)
     if (error) {
