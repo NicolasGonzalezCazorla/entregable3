@@ -2,7 +2,6 @@ import { supabase } from '@/lib/supabase';
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {
-  // Obtenemos el ID del usuario de los parámetros de la URL
   const { searchParams } = new URL(request.url);
   const id = searchParams.get('id');
 
@@ -11,7 +10,7 @@ export async function GET(request) {
   }
 
   const { data, error } = await supabase
-    .from('usuario') // Nombre exacto en tu Supabase
+    .from('usuario') 
     .select('*')
     .eq('id', id)
     .single();

@@ -32,3 +32,32 @@ No se ha implementado lógica de negocio ni conexión con bases de datos, ya que
 - Favoritos
 Todos los componentes están integrados dentro de la aplicación y mantienen una coherencia visual común.
 
+== GESTIÓN DE USUARIOS Y PERFIL ==
+Base de Datos: Tabla usuario con auth_id, nombre, username y foto_url. Políticas RLS activas
+Backend: Endpoint /api/usuarios. Implementa GET para lectura de perfil y PUT para actualización
+Frontend: Componente PerfilInfo.js con formulario reactivo y selector de avatares locales
+
+== CATÁLOGO DE ANIMALES ==
+Base de Datos: Tabla animal con campos de taxonomía, dieta, origen y URL de imagen
+Backend: Endpoint /api/animales. Implementa GET para devolver el listado completo desde Supabase
+Frontend: Página /animales. Mapeo dinámico de datos en cards
+
+== SISTEMA DE FAVORITOS ==
+Base de Datos: Tabla relacional animales_favoritos_usuarios para persistencia de datos
+Backend: Endpoint /api/favoritos. Implementa GET para consulta , DELETE para eliminación de registros e INSERT para añadir 
+Frontend: Sección de favoritos en perfil y actualización de estado sin recarga
+
+== MAPA DEL ZOO ==
+Base de Datos: Tabla mapa con información de imagen, títulos y descripción general
+Backend: Endpoint /api/mapa. Implementa GET para servir los datos dinámicos del plano del parque
+Frontend: Componente mapa.js con visualización de imagen y leyenda de zonas por categorías
+
+== ACTIVIDADES ==
+Base de Datos: Tabla actividades con horarios, ubicación y tipo de evento
+Backend: Endpoint /api/actividades. Implementa GET para listar los eventos del día
+Frontend: Sección de actividades 
+
+== ARQUITECTURA DEL SISTEMA ==
+Estructura: Cliente-Servidor mediante API Routes de Next.js
+Seguridad: El Frontend nunca conecta directamente con Supabase, cumpliendo el requisito de la entrega
+Validación: Manejo de códigos de estado HTTP (200, 201, 401, 500) en todas las comunicaciones

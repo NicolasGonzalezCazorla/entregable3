@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react"; // 1. Añadimos useEffect
+import { useState, useEffect } from "react"; 
 import Grid from "../grid";
 import NavBar from "../navBar";
 import Filtro from "./filtro";
 
 export default function Animales() {
-  // 2. Estado inicial vacío. Ya no usamos animalesMock aquí.
   const [animales, setAnimales] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -15,15 +14,14 @@ export default function Animales() {
   const [filtroContinente, setFiltroContinente] = useState("");
   const [busqueda, setBusqueda] = useState("");
 
-  // 3. Llamada a la API al cargar la página
   useEffect(() => {
     async function cargarAnimales() {
       try {
-        const response = await fetch('/api/animales'); // Llamada a tu Route Handler
+        const response = await fetch('/api/animales'); 
         const data = await response.json();
 
         if (response.ok) {
-          setAnimales(data); // Guardamos los datos de Supabase en el estado
+          setAnimales(data); 
         } else {
           console.error("Error al obtener datos:", data.error);
         }
@@ -37,10 +35,8 @@ export default function Animales() {
     cargarAnimales();
   }, []);
 
-  // 4. Los filtros ahora usan las columnas reales de tu base de datos
   const animalesFiltrados = animales
     .filter((animal) => {
-      // Ajustamos 'tipo' por 'dieta' u 'origen' según tus columnas reales
       const tipoOK = filtroTipo === "" || animal.dieta === filtroTipo; 
       const continenteOK = filtroContinente === "" || animal.origen === filtroContinente;
       const nombreOK = animal.nombre.toLowerCase().includes(busqueda.toLowerCase());
@@ -82,7 +78,6 @@ export default function Animales() {
           </aside>
 
           <section>
-            {/* El Grid recibe ahora los datos que vienen de la API */}
             <Grid animales={animalesFiltrados} />
 
             <div className="mt-12 flex justify-center">

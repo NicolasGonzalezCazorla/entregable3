@@ -2,7 +2,6 @@ import { supabase } from '@/lib/supabase'; //
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  // Consultamos la tabla 'actividad'
   const { data, error } = await supabase
     .from('mapa')
     .select('*');
