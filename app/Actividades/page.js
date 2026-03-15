@@ -6,8 +6,8 @@ import ActividadesContent from "./actividades";
 export default async function Page() {
   // Traemos el id y el resto de campos
   const { data: actividades, error } = await supabase
-    .from("actividades")
-    .select("id, nombre, descripcion, url_imagen, categoria");
+    .from("actividad")
+    .select("id, nombre, descripcion, url_imagen");
 
   if (error) {
     console.error("Error cargando actividades:", error);
