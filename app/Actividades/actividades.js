@@ -1,8 +1,6 @@
 "use client";
 
 export default function ActividadesContent({ actividades }) {
-  const explora = actividades.filter(a => a.categoria === 'explora');
-  const visitadas = actividades.filter(a => a.categoria === 'visitadas');
 
   return (
     <main className="mx-auto max-w-6xl px-6 pb-14 space-y-16">
